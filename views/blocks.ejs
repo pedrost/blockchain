@@ -1,0 +1,23 @@
+!<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= blockchain.isValid() %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div>
+
+		<% for(var i = 0; i < blocks.length; i++) { %>
+			<p> <%= blocks[i].index %> </p>
+			<p> <%= JSON.stringify(blocks[i].data) %> </p>
+			<p> <%= blocks[i].timestamp %> </p>
+			<p>HASH <span style="color: <%= colors[i] %>"> <%= blocks[i].hash %> </span> </p>
+			<p>PREVIOUS HASH <span style="color: <%= colors[i - 1] %>"> <%= blocks[i].previousHash %> </span> </p>
+		<% } %>
+		
+	</div>
+</body>
+
+</html>
