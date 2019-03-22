@@ -1,8 +1,16 @@
 const app = require('express')();
 const Blockchain = require('./models/Blockchain');
 
-app.listen(3001);
+app.listen(3000,  () => {
+  console.log(`${containerId} listening on port 3000`)
+});
 app.set('view engine', 'ejs');
+
+const containerId=process.env.HOSTNAME;
+
+app.get('/',  (req, res) => {
+  res.send(`Chain <code>${containerId}</code>! a`)
+});
 
 const blockchain = new Blockchain()
 blockchain.addBlock({ amount: 4 });
