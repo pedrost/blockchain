@@ -33,10 +33,13 @@ const initHttpServer = (http_port = process.env.HTTP_PORT) => {
     res.send();
   });
 
-  app.listen(http_port);
-  return true;
+  const server = app.listen(http_port);
+
+  return server;
 };
 
+const MyHtppServer = initHttpServer();
+
 module.exports = {
-  initHttpServer: initHttpServer
+  initHttpServer: initHttpServer,
 };

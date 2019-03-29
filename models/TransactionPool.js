@@ -1,5 +1,3 @@
-const Transaction = require("./Transaction");
-
 class TransactionPool {
   constructor() {
     this.index = 1;
@@ -9,6 +7,16 @@ class TransactionPool {
   addToTransactionPool(transaction) {
     this.transactions.push(transaction);
   }
+
+  getTransactionPool() {
+    return this.transactions;
+  }
+
 }
 
-module.exports = TransactionPool;
+const Pool = new TransactionPool();
+
+module.exports = {
+  addToTransactionPool: Pool.addToTransactionPool,
+  getTransactionPool: Pool.getTransactionPool,
+};

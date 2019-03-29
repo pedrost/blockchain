@@ -7,14 +7,12 @@ class Block {
     data,
     timestamp,
     hash,
-    minterBalance,
     minterAddress
   ) {
     this.index = index;
     this.previousHash = previousHash.toString();
     this.timestamp = timestamp || this.getCurrentTimestamp();
     this.data = data;
-    this.minterBalance = minterBalance;
     this.minterAddress = minterAddress;
     this.hash = hash || this.calculateHash().toString();
   }

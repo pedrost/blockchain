@@ -16,7 +16,7 @@ const initP2PServer = (p2p_port = process.env.P2P_PORT) => {
   }
   const server = new WebSocket.Server({ port: p2p_port });
   server.on("connection", ws => initConnection(ws));
-  return true;
+  return server;
 };
 
 const initConnection = ws => {
@@ -39,6 +39,9 @@ const initMessageHandler = ws => {
         break;
       case MessageType.RESPONSE_BLOCKCHAIN:
         handleBlockchainResponse(message);
+        break;
+      case MessageType.RESPONSE_TRANSACTION_POOL:
+        handleTransactionPoolResponse(message);
         break;
     }
   });
@@ -68,7 +71,7 @@ var connectToPeers = (
   });
 };
 
-var handleBlockchainResponse = message => {
+const handleBlockchainResponse = message => {
   var receivedBlocks = JSON.parse(message.data).sort(
     (b1, b2) => b1.index - b2.index
   );
@@ -100,6 +103,11 @@ var handleBlockchainResponse = message => {
     );
   }
 };
+
+const handleTransactionPoolResponse = message => {
+  const recievedTransaction = JSON.parse(message.data);
+  console.log('RECIEVED ->>>>>>>>>>>.', recievedTransaction)
+}
 
 const queryChainLengthMsg = () => ({ type: MessageType.QUERY_LATEST });
 const queryAllMsg = () => ({ type: MessageType.QUERY_ALL });
